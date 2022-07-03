@@ -1,0 +1,1 @@
+CREATE TABLE orders (id SERIAL PRIMARY KEY, status TEXT CHECK (status IN ('active', 'complete')), user_id INTEGER REFERENCES users(id));

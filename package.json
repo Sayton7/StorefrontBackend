@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "prettier": "prettier --config .prettierrc.json src/**/*.ts --write",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write",
     "check": "npm run prettier && npm run lint",
     "build": "npx tsc",
     "jasmine": "jasmine-ts",
     "test": "npm run build && npm run jasmine",
-    "start": "nodemon src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./build --onSuccess \"node ./build/server.js\""
   },
   "author": "",
@@ -24,13 +23,14 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jasmine": "^4.2.1",
     "jasmine-spec-reporter": "^7.0.0",
     "jasmine-ts": "^0.4.0",
-    "nodemon": "^2.0.18",
     "prettier": "^2.7.1",
     "supertest": "^6.2.3",
     "ts-node": "^10.8.1",
@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "pg": "^8.7.3"
   }
