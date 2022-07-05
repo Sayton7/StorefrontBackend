@@ -6,11 +6,12 @@
       "user": { "ENV" : "POSTGRES_USER"},
       "password": { "ENV" : "POSTGRES_PASSWORD"}
     },
+
     "test": {
       "driver": "pg",
       "host": { "ENV" : "POSTGRES_HOST"},
-      "database": { "ENV" : ""},
-      "user": { "ENV" : ""},
-      "password": { "ENV" : ""}
+      "database": { "ENV" : "POSTGRES_DB_TEST"},
+      "user": { "ENV" : "POSTGRES_USER"},
+      "password": { "ENV" : "POSTGRES_PASSWORD"}
     }
   }

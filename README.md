@@ -10,4 +10,8 @@ In psql run the following:
   `CREATE DATABASE store_front;`
   `\c store_front`
   `GRANT ALL PRIVILEGES ON DATABASE store_front TO store_keeper;`
+  Do the same for the testing db:
+  `CREATE DATABASE store_front_test;`
+  `\c store_front_test`
+  `GRANT ALL PRIVILEGES ON DATABASE store_front TO store_keeper;`
 To test that it is working run \dt and it should output "No relations found."

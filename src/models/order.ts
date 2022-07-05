@@ -1,9 +1,16 @@
-import Client from '../database';
+import { Client } from '../database';
 
 export type Order = {
-  id: number;
+  id?: number;
   status: string;
   user_id: number;
+};
+
+export type OrderProducts = {
+  id?: number;
+  quantity: number;
+  order_id: number;
+  product_id: number;
 };
 
 export class Orders {
@@ -19,10 +26,10 @@ export class Orders {
     }
   }
 
-  async show(id: string): Promise<Order> {
+  async show(id: number): Promise<Order> {
     try {
       const conn = await Client.connect();
-      const sql = 'SELECT * FROM orders WHERE id=($1) RETURNING *';
+      const sql = 'SELECT * FROM orders WHERE id=($1)';
       const result = await conn.query(sql, [id]);
       conn.release();
       return result.rows[0];
@@ -44,10 +51,10 @@ export class Orders {
     }
   }
 
-  async delete(id: string): Promise<Order> {
+  async delete(id: number): Promise<Order> {
     try {
       const conn = await Client.connect();
-      const sql = 'DELETE FROM products WHERE id=($1) RETURNING *';
+      const sql = 'DELETE FROM orders WHERE id=($1) RETURNING *';
       const result = await conn.query(sql, [id]);
       conn.release();
       return result.rows[0];
@@ -57,10 +64,10 @@ export class Orders {
   }
 
   async addProduct(
-    quantity: string,
-    oderID: string,
-    productID: string
-  ): Promise<Order> {
+    quantity: number,
+    oderID: number,
+    productID: number
+  ): Promise<OrderProducts> {
     try {
       const conn = await Client.connect();
       const sql =
@@ -70,6 +77,19 @@ export class Orders {
       return result.rows[0];
     } catch (err) {
       throw new Error(`Cannot add product to order: ${err}`);
+    }
+  }
+
+  async removeProduct(id: number): Promise<OrderProducts> {
+    try {
+      const conn = await Client.connect();
+      const sql =
+        'DELETE FROM order_products WHERE id=($1) RETURNING *';
+      const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(`Cannot remove product order: ${err}`);
     }
   }
 }
