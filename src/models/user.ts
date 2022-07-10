@@ -1,4 +1,4 @@
-import { Client } from '../database';
+import { client } from '../database';
 
 export type User = {
   id?: number;
@@ -9,7 +9,7 @@ export type User = {
 export class Users {
   async index(): Promise<User[]> {
     try {
-      const conn = await Client.connect();
+      const conn = await client.connect();
       const sql = 'SELECT * FROM users';
       const result = await conn.query(sql);
       conn.release();
@@ -21,7 +21,7 @@ export class Users {
 
   async show(id: number): Promise<User> {
     try {
-      const conn = await Client.connect();
+      const conn = await client.connect();
       const sql = 'SELECT * FROM users WHERE id=($1)';
       const result = await conn.query(sql, [id]);
       conn.release();
@@ -33,7 +33,7 @@ export class Users {
 
   async create(u: User): Promise<User> {
     try {
-      const conn = await Client.connect();
+      const conn = await client.connect();
       const sql =
         'INSERT INTO users (user_name, password) VALUES ($1, $2) RETURNING *';
       const result = await conn.query(sql, [u.user_name, u.password]);
@@ -46,7 +46,7 @@ export class Users {
 
   async delete(id: number): Promise<User> {
     try {
-      const conn = await Client.connect();
+      const conn = await client.connect();
       const sql = 'DELETE FROM users WHERE id=($1) RETURNING *';
       const result = await conn.query(sql, [id]);
       conn.release();
