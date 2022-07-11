@@ -47,3 +47,18 @@ export const remove = async (_req: Request, res: Response) => {
     res.json(err);
   }
 };
+
+export const authenticate = async (_req: Request, res: Response) => {
+  const user: User = {
+    user_name: _req.body.user_name,
+    password: _req.body.password,
+  }
+
+  try {
+    const authenticatedUser = await users.authenticate(user.user_name, user.password);
+    res.json(authenticatedUser);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
+};
