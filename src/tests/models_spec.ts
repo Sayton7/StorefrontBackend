@@ -14,31 +14,26 @@ describe('Users model', () => {
       user_name: 'user_name',
       password: 'password',
     });
-    expect(result).toEqual({
-      id: 1,
-      user_name: 'user_name',
-      password: 'password',
-    });
+    expect(result.user_name).toEqual('user_name');
   });
 
   it('index method should return a list of users', async () => {
     const result = await users.index();
-    expect(result).toEqual([
-      {
-        id: 1,
-        user_name: 'user_name',
-        password: 'password',
-      },
-    ]);
+    expect(result[0].user_name).toEqual('user_name');
   });
 
   it('show method should return the correct user', async () => {
     const result = await users.show(1);
-    expect(result).toEqual({
-      id: 1,
-      user_name: 'user_name',
-      password: 'password',
-    });
+    expect(result.user_name).toEqual('user_name');
+  });
+
+  it('authenticate method should check if the password is valid', async () => {
+    const result = await users.authenticate('user_name', 'password');
+    if (result) {
+      expect(result.user_name).toEqual('user_name');
+    } else if (!result) {
+      expect(result).toEqual(null);
+    }
   });
 
   // Start of Product model
@@ -157,11 +152,7 @@ describe('Users model', () => {
 
   it('delete method should remove correct user', async () => {
     const result = await users.delete(1);
-    expect(result).toEqual({
-      id: 1,
-      user_name: 'user_name',
-      password: 'password',
-    });
+    expect(result.user_name).toEqual('user_name');
   });
 });
 
