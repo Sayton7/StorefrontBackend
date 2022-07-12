@@ -6,7 +6,7 @@ const users = new Users();
 const products = new Products();
 const orders = new Orders();
 
-// Start of User model
+// Start of User Model
 
 describe('Users model', () => {
   it('create method should add a user', async () => {
@@ -14,16 +14,6 @@ describe('Users model', () => {
       user_name: 'user_name',
       password: 'password',
     });
-    expect(result.user_name).toEqual('user_name');
-  });
-
-  it('index method should return a list of users', async () => {
-    const result = await users.index();
-    expect(result[0].user_name).toEqual('user_name');
-  });
-
-  it('show method should return the correct user', async () => {
-    const result = await users.show(1);
     expect(result.user_name).toEqual('user_name');
   });
 
@@ -36,7 +26,17 @@ describe('Users model', () => {
     }
   });
 
-  // Start of Product model
+  it('index method should return a list of users', async () => {
+    const result = await users.index();
+    expect(result[0].user_name).toEqual('user_name');
+  });
+
+  it('show method should return the correct user', async () => {
+    const result = await users.show(1);
+    expect(result.user_name).toEqual('user_name');
+  });
+
+  // Start of Product Model
 
   describe('Products model', () => {
     it('create method should add a product', async () => {
@@ -71,7 +71,7 @@ describe('Users model', () => {
       });
     });
 
-    // Start of Order model
+    // Start of Order Model
 
     describe('Orders model', () => {
       it('create method should add an order', async () => {
@@ -86,7 +86,7 @@ describe('Users model', () => {
         });
       });
 
-      it('index method should return a list of products', async () => {
+      it('index method should return a list of orders', async () => {
         const result = await orders.index();
         expect(result).toEqual([
           {
@@ -97,7 +97,7 @@ describe('Users model', () => {
         ]);
       });
 
-      it('show method should return the correct product', async () => {
+      it('show method should return the correct order', async () => {
         const result = await orders.show(1);
         expect(result).toEqual({
           id: 1,
@@ -136,7 +136,7 @@ describe('Users model', () => {
       });
     });
 
-    //End of Order model
+    //End of Order Model
 
     it('delete method should remove correct product', async () => {
       const result = await products.delete(1);
@@ -148,7 +148,7 @@ describe('Users model', () => {
     });
   });
 
-  // End of Product model
+  // End of Product Model
 
   it('delete method should remove correct user', async () => {
     const result = await users.delete(1);
@@ -156,4 +156,4 @@ describe('Users model', () => {
   });
 });
 
-// End of User model
+// End of User Model
