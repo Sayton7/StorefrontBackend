@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
 import { User, Users } from '../models/user';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+dotenv.config();
 
 const users = new Users();
 
@@ -52,11 +56,18 @@ export const authenticate = async (_req: Request, res: Response) => {
   const user: User = {
     user_name: _req.body.user_name,
     password: _req.body.password,
-  }
+  };
 
   try {
-    const authenticatedUser = await users.authenticate(user.user_name, user.password);
-    res.json(authenticatedUser);
+    const authenticatedUser = await users.authenticate(
+      user.user_name,
+      user.password
+    );
+    const token = jwt.sign(
+      { user: authenticatedUser },
+      process.env.TOKEN_SECRET as string
+    );
+    res.json(token);
   } catch (err) {
     res.status(400);
     res.json(err);
