@@ -5,27 +5,36 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
+- Index
 - Show
 - Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Delete [token required]
+<!-- - [OPTIONAL] Top 5 most popular products 
+- [OPTIONAL] Products by category (args: product category) -->
 
 #### Users
 - Index [token required]
 - Show [token required]
-- Create N[token required]
+- Current Orders by user (args: user id)[token required]
+- Create
+- Delete [token required]
+- Authenticate
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Index [token required]
+- Show [token required]
+- Create [token required]
+- Delete [token required]
+- Add Product to Order [token required]
+- Remove Product from Order [token required]
+<!-- - [OPTIONAL] Completed Orders by user (args: user id)[token required] -->
 
 ## Data Shapes
 #### Product
--  id
+- id
 - name
 - price
-- [OPTIONAL] category
+<!-- - [OPTIONAL] category -->
 
 #### User
 - id
@@ -38,7 +47,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 
 #### Order-Products
-
 - id
 - quantity
 - oder_id

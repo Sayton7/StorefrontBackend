@@ -73,3 +73,13 @@ export const authenticate = async (_req: Request, res: Response) => {
     res.json(err);
   }
 };
+
+export const showUserOrders = async (_req: Request, res: Response) => {
+  try {
+    const userOrders = await users.showUserOrders(parseInt(_req.params.id));
+    res.json(userOrders);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
+};

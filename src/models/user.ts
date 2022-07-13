@@ -1,4 +1,5 @@
 import { client } from '../database';
+import { Order } from './order';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 
@@ -93,6 +94,18 @@ export class Users {
       return null;
     } catch (err) {
       throw new Error(`Cannot authenticate user: ${err}`);
+    }
+  }
+
+  async showUserOrders(id: number): Promise<Order[]> {
+    try {
+      const conn = await client.connect();
+      const sql = 'SELECT * FROM orders WHERE user_id=($1)';
+      const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows;
+    } catch (err) {
+      throw new Error(`Cannot get orders: ${err}`);
     }
   }
 }

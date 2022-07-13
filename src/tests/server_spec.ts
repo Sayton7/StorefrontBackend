@@ -69,16 +69,14 @@ describe('Users Endpoints', async () => {
     it('should show a list of products', async () => {
       const res = await request
         .get('/products')
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${token}`);
+        .set('Content-Type', 'application/json');
       expect(res.body[0].name).toEqual('test_product');
     });
 
     it('should show a specified product', async () => {
       const res = await request
         .get(`/products/${product_id}`)
-        .set('Content_Type', 'application/json')
-        .set('Authorization', `Bearer ${token}`);
+        .set('Content_Type', 'application/json');
       expect(res.body.name).toEqual('test_product');
     });
 
@@ -124,6 +122,15 @@ describe('Users Endpoints', async () => {
             product_id,
           });
         expect(res.body.quantity).toEqual(50);
+      });
+
+      // placed here from the user model for the sake of testing order
+      it('should show orders made by a specific user', async () => {
+        const res = await request
+          .get(`/users/${user_id}/orders`)
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${token}`);
+        expect(res.body[0].user_id).toEqual(parseInt(`${user_id}`));
       });
 
       it('should remove a product from an order', async () => {

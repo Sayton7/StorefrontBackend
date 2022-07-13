@@ -6,6 +6,7 @@ const usersRoute = Router();
 
 usersRoute.route('/').get(tokenAuth, usersR.index);
 usersRoute.route('/:id').get(tokenAuth, usersR.show);
+usersRoute.route('/:id/orders').get(tokenAuth, usersR.showUserOrders);
 usersRoute.route('/').post(usersR.create);
 usersRoute.route('/').delete(tokenAuth, usersR.remove);
 usersRoute.route('/authenticate').post(usersR.authenticate);

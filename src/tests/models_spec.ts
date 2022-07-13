@@ -116,6 +116,18 @@ describe('Users model', () => {
         });
       });
 
+      // placed here from the user model for the sake of testing order
+      it('show orders made by a specific user', async () => {
+        const result = await users.showUserOrders(1);
+        expect(result).toEqual([
+          {
+            id: 1,
+            status: 'active',
+            user_id: 1,
+          },
+        ]);
+      });
+
       it('removeProduct method should remove product from order_products table', async () => {
         const result = await orders.removeProduct(1);
         expect(result).toEqual({
