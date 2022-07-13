@@ -1,1 +1,1 @@
-CREATE TABLE products (id SERIAL PRIMARY KEY, name VARCHAR(100), price integer);
+CREATE TABLE products (id SERIAL PRIMARY KEY, name VARCHAR(100), price INTEGER);

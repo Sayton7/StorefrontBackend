@@ -31,23 +31,34 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 #### Product
-- id
-- name
-- price
-<!-- - [OPTIONAL] category -->
+
+| Column | Type |
+| --- | --- |
+| id | PRIMARY KEY |
+| name | VARCHAR(100) |
+| price | INTEGER |
 
 #### User
-- id
-- user_name
-- password
+
+| Column | Type |
+| --- | --- |
+| id | PRIMARY KEY |
+| user_name | VARCHAR(100) |
+| password | VARCHAR(100) |
 
 #### Orders
-- id
-- status of order (active or complete)
-- user_id
+
+| Column | Type |
+| --- | --- |
+| id | PRIMARY KEY |
+| status | TEXT IN ('active', 'complete') |
+| user_id | INTEGER REFERENCES users(id) |
 
 #### Order-Products
-- id
-- quantity
-- oder_id
-- product_id
+
+| Column | Type |
+| --- | --- |
+| id | PRIMARY KEY |
+| quantity | INTEGER |
+| oder_id | INTEGER REFERENCES orders(id) |
+| product_id | INTEGER REFERENCES products(id) |
